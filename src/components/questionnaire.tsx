@@ -1,0 +1,6 @@
+'use client';
+import { useState } from 'react';
+import { Button } from './button';
+import { RadioGroup, RadioGroupItem } from './radio-group';
+export interface Question {id:string;title:string;options:{label:string;value:string}[]}
+export function Questionnaire({questions,onComplete}:{questions:Question[];onComplete:(answers:Record<string,string>)=>void}){const[index,setIndex]=useState(0);const[answers,setAnswers]=useState<Record<string,string>>({});const q=questions[index];if(!q)return null;return <form className="av-questionnaire frost-surface" onSubmit={e=>{e.preventDefault();if(index<questions.length-1)setIndex(index+1);else onComplete(answers)}}><div className="av-questionnaire-step">{index+1} / {questions.length}</div><h3 id={`question-${q.id}`}>{q.title}</h3><RadioGroup aria-labelledby={`question-${q.id}`} value={answers[q.id]||''} onValueChange={v=>setAnswers({...answers,[q.id]:v})}>{q.options.map(o=><RadioGroupItem key={o.value} value={o.value} label={o.label}/>)}</RadioGroup><div className="av-dialog-footer">{index>0&&<Button variant="ghost" onClick={()=>setIndex(index-1)}>Back</Button>}<Button type="submit" disabled={!answers[q.id]}>{index===questions.length-1?'Finish':'Continue'}</Button></div></form>;}

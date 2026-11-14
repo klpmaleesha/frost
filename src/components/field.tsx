@@ -1,0 +1,2 @@
+import { withClass } from './utils';
+export const Field=withClass('div','av-field');export const FieldGroup=withClass('div','av-field-group');export const FieldSet=withClass('fieldset','av-fieldset');export const FieldLegend=withClass('legend','av-field-legend');export const FieldLabel=withClass('label','av-label');export const FieldDescription=withClass('p','av-hint');export const FieldError=withClass('p','av-hint av-error');export const FieldContent=withClass('div','av-field-content');export const FieldSeparator=withClass('div','av-field-separator');

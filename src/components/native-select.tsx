@@ -1,0 +1,3 @@
+import { forwardRef, useId, type SelectHTMLAttributes } from 'react';
+export const NativeSelect=forwardRef<HTMLSelectElement,SelectHTMLAttributes<HTMLSelectElement>&{label?:string}>(function NativeSelect({label,id,className='',children,...props},ref){const auto=useId();const selectId=id||auto;return <div className="av-field">{label&&<label htmlFor={selectId} className="av-label">{label}</label>}<select ref={ref} id={selectId} className={`av-native-select ${className}`} {...props}>{children}</select></div>;});
+export function NativeSelectOption(props:SelectHTMLAttributes<HTMLOptionElement>&{value?:string}){return <option {...props}/>;}

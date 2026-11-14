@@ -1,0 +1,75 @@
+{
+  "name": "avyntora-ui",
+  "version": "0.2.0",
+  "description": "Living frosted-glass components with shared optics and tactile motion",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "lib",
+    "src/components",
+    "scripts/add.mjs",
+    "scripts/source-graph.mjs",
+    "docs/*.md"
+  ],
+  "main": "./lib/avyntora.js",
+  "types": "./lib/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/index.d.ts",
+      "import": "./lib/avyntora.js"
+    },
+    "./styles.css": "./lib/avyntora.css"
+  },
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "bin": {
+    "avyntora": "./scripts/add.mjs"
+  },
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "node scripts/catalog.mjs && tsc --noEmit && npm run registry && vite build && node scripts/build-pages.mjs",
+    "build:lib": "vite build --config vite.lib.config.ts && tsc -p tsconfig.lib.json",
+    "registry": "node scripts/registry.mjs",
+    "test": "playwright test",
+    "preview": "vite preview --host 127.0.0.1",
+    "prepack": "npm run build:lib",
+    "check:distribution": "node scripts/check-distribution.mjs"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^7.0.6",
+    "@tanstack/react-table": "^8.21.3",
+    "cmdk": "^1.1.1",
+    "date-fns": "^4.4.0",
+    "embla-carousel-react": "^8.6.0",
+    "input-otp": "^1.5.0",
+    "lucide-react": "latest",
+    "radix-ui": "latest",
+    "react-day-picker": "^10.0.2",
+    "react-hook-form": "^7.92.0",
+    "react-resizable-panels": "^4.22.1",
+    "recharts": "^3.10.1",
+    "sonner": "^2.0.8",
+    "vaul": "^1.1.2",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "latest",
+    "@playwright/test": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

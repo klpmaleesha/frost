@@ -1,0 +1,12 @@
+node_modules
+dist
+lib
+verification
+test-results
+playwright-report
+site-publication
+*.tgz
+docs/reference*
+docs/screenshots
+docs/apple-*
+.env*

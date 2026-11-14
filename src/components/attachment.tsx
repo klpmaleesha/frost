@@ -1,0 +1,2 @@
+import { File, X, Download } from 'lucide-react';
+export function Attachment({name,size,onRemove,href}:{name:string;size?:string;onRemove?:()=>void;href?:string}){return <div className="av-attachment frost-surface"><span className="av-file-icon"><File size={20}/></span><div><strong>{name}</strong>{size&&<span>{size}</span>}</div>{href&&<a href={href} download aria-label={`Download ${name}`}><Download size={15}/></a>}{onRemove&&<button className="av-icon-button" onClick={onRemove} aria-label={`Remove ${name}`}><X size={15}/></button>}</div>;}

@@ -1,0 +1,351 @@
+{
+  "errors": [],
+  "findings": [
+    {
+      "viewportWidth": 1440,
+      "id": "calendar",
+      "width": 280,
+      "height": 261,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "card",
+      "width": 960,
+      "height": 212,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 3,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "class": "av-progress-indicator",
+          "left": -228,
+          "right": -280
+        }
+      ]
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "carousel",
+      "width": 960,
+      "height": 198,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 5,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "class": "av-carousel-item ",
+          "left": 972,
+          "right": 972
+        },
+        {
+          "tag": "DIV",
+          "class": "carousel-slide frost-surface",
+          "left": 976,
+          "right": 968
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "left": 997,
+          "right": 947
+        },
+        {
+          "tag": "H3",
+          "class": "",
+          "left": 997,
+          "right": 947
+        },
+        {
+          "tag": "DIV",
+          "class": "av-carousel-item ",
+          "left": 1944,
+          "right": 1944
+        },
+        {
+          "tag": "DIV",
+          "class": "carousel-slide frost-surface",
+          "left": 1948,
+          "right": 1940
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "left": 1969,
+          "right": 1919
+        },
+        {
+          "tag": "H3",
+          "class": "",
+          "left": 1969,
+          "right": 1919
+        }
+      ]
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "chart",
+      "width": 960,
+      "height": 190,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "command",
+      "width": 960,
+      "height": 160,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "data-table",
+      "width": 960,
+      "height": 263,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 4,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "input-otp",
+      "width": 960,
+      "height": 150,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 6,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "navigation-menu",
+      "width": 960,
+      "height": 210,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "progress",
+      "width": 960,
+      "height": 150,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 2,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "class": "av-progress-indicator",
+          "left": -497,
+          "right": -499
+        }
+      ]
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "resizable",
+      "width": 960,
+      "height": 150,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 1440,
+      "id": "sidebar",
+      "width": 960,
+      "height": 171,
+      "documentWidth": 1440,
+      "viewport": 1440,
+      "material": 2,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "calendar",
+      "width": 280,
+      "height": 235,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "card",
+      "width": 294,
+      "height": 212,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 3,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "class": "av-progress-indicator",
+          "left": -42,
+          "right": -94
+        }
+      ]
+    },
+    {
+      "viewportWidth": 390,
+      "id": "carousel",
+      "width": 294,
+      "height": 198,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 5,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "class": "av-carousel-item ",
+          "left": 306,
+          "right": 306
+        },
+        {
+          "tag": "DIV",
+          "class": "carousel-slide frost-surface",
+          "left": 310,
+          "right": 302
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "left": 331,
+          "right": 281
+        },
+        {
+          "tag": "H3",
+          "class": "",
+          "left": 331,
+          "right": 281
+        },
+        {
+          "tag": "DIV",
+          "class": "av-carousel-item ",
+          "left": 612,
+          "right": 612
+        },
+        {
+          "tag": "DIV",
+          "class": "carousel-slide frost-surface",
+          "left": 616,
+          "right": 608
+        },
+        {
+          "tag": "SPAN",
+          "class": "",
+          "left": 637,
+          "right": 587
+        },
+        {
+          "tag": "H3",
+          "class": "",
+          "left": 637,
+          "right": 587
+        }
+      ]
+    },
+    {
+      "viewportWidth": 390,
+      "id": "chart",
+      "width": 294,
+      "height": 190,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "command",
+      "width": 294,
+      "height": 160,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "data-table",
+      "width": 294,
+      "height": 237,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 4,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "input-otp",
+      "width": 294,
+      "height": 150,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 6,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "navigation-menu",
+      "width": 294,
+      "height": 210,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "progress",
+      "width": 294,
+      "height": 150,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 2,
+      "overflow": [
+        {
+          "tag": "DIV",
+          "class": "av-progress-indicator",
+          "left": -151,
+          "right": -153
+        }
+      ]
+    },
+    {
+      "viewportWidth": 390,
+      "id": "resizable",
+      "width": 294,
+      "height": 180,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 1,
+      "overflow": []
+    },
+    {
+      "viewportWidth": 390,
+      "id": "sidebar",
+      "width": 294,
+      "height": 171,
+      "documentWidth": 390,
+      "viewport": 390,
+      "material": 2,
+      "overflow": []
+    }
+  ]
+}

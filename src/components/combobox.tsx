@@ -1,0 +1,7 @@
+'use client';
+import { useState, useId } from 'react';
+import { Check, ChevronsUpDown } from 'lucide-react';
+import { Button } from './button';
+import { Command, CommandInput, CommandList, CommandEmpty, CommandItem } from './command';
+import { Popover, PopoverContent, PopoverTrigger } from './popover';
+export function Combobox({options,value,onValueChange,placeholder='Select an option',label='Options'}:{options:{value:string;label:string}[];value?:string;onValueChange?:(value:string)=>void;placeholder?:string;label?:string}){const[open,setOpen]=useState(false);const[internal,setInternal]=useState('');const id=useId();const selected=value??internal;return <Popover open={open} onOpenChange={setOpen}><PopoverTrigger asChild><Button variant="secondary" role="combobox" aria-expanded={open} aria-controls={id} aria-label={label} className="av-combobox-trigger">{options.find(o=>o.value===selected)?.label||placeholder}<ChevronsUpDown size={14}/></Button></PopoverTrigger><PopoverContent className="av-combobox-content"><Command><CommandInput placeholder="Search options…" aria-label={`Search ${label}`}/><CommandList id={id}><CommandEmpty>No options found.</CommandEmpty>{options.map(o=><CommandItem key={o.value} value={o.label} onSelect={()=>{setInternal(o.value);onValueChange?.(o.value);setOpen(false)}}>{o.label}{selected===o.value&&<Check size={14}/>}</CommandItem>)}</CommandList></Command></PopoverContent></Popover>;}

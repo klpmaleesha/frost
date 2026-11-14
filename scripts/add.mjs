@@ -1,0 +1,12 @@
+#!/usr/bin/env node
+import {constants} from 'node:fs';
+import {access,mkdir,writeFile,readdir} from 'node:fs/promises';
+import {resolve,relative,isAbsolute} from 'node:path';
+import {families,resolveSources} from './source-graph.mjs';
+const args=process.argv.slice(2);if(!args.length||args.includes('--help')){console.log(`Avyntora UI\n\nUsage: avyntora button input [--cwd project] [--dir src/components/avyntora]\n       avyntora --all [--cwd project]\n\nComponents: ${families.join(', ')}\n\nSource files are preserved. Frost engine and dependencies are resolved automatically.`);process.exit(0)}
+let cwd=process.cwd(),directory='src/components/avyntora';const selected=[];
+for(let i=0;i<args.length;i++){const arg=args[i];if(arg==='--cwd'||arg==='--dir'){if(!args[i+1]||args[i+1].startsWith('--'))throw new Error(`${arg} needs a path`);if(arg==='--cwd')cwd=resolve(args[++i]);else directory=args[++i];}else if(arg==='--all')selected.push(...families);else if(families.includes(arg))selected.push(arg);else throw new Error(`Unknown component: ${arg}. Run --help.`)}
+if(!selected.length)throw new Error('Choose a component or --all.');const base=resolve(cwd),target=resolve(base,directory),path=relative(base,target);if(!path||path==='..'||path.startsWith('..\\')||path.startsWith('../')||isAbsolute(path))throw new Error('The component directory must be inside your project.');await access(resolve(base,'package.json')).catch(()=>{throw new Error('Choose a React project with a package.json.');});
+const{sources,dependencies,styles}=await resolveSources(selected);await mkdir(target,{recursive:true});let kept=0;for(const[file,content]of[...sources,['styles.css',styles]]){try{await writeFile(resolve(target,file),content,{flag:'wx'});console.log(`Added ${relative(base,resolve(target,file))}`)}catch(e){if(e.code==='EEXIST'){console.log(`Kept existing ${file}`);kept++;}else throw e;}}
+const all=(await readdir(target)).filter(n=>n.endsWith('.tsx')).sort();const barrel="import './styles.css';\n"+all.map(n=>`export * from './${n.slice(0,-4)}';`).join('\n')+'\n';try{await writeFile(resolve(target,'index.ts'),barrel,{flag:'wx'})}catch(e){if(e.code!=='EEXIST')throw e;console.log('Kept existing index.ts. Add exports for newly copied components as needed.');}
+console.log(`\nInstall these dependencies if absent:\n  npm install ${dependencies.join(' ')}\n\nImport styles.css once. Wrap your application in FrostProvider. Existing files kept: ${kept}.`);

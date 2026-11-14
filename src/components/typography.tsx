@@ -1,0 +1,2 @@
+import { withClass } from './utils';
+export const TypographyH1=withClass('h1','av-typography-h1');export const TypographyH2=withClass('h2','av-typography-h2');export const TypographyH3=withClass('h3','av-typography-h3');export const TypographyP=withClass('p','av-typography-p');export const TypographyMuted=withClass('p','av-typography-muted');export const TypographyLead=withClass('p','av-typography-lead');export const TypographyCode=withClass('code','av-typography-code');export const TypographyBlockquote=withClass('blockquote','av-typography-blockquote');

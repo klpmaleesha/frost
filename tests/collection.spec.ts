@@ -1,0 +1,10 @@
+import {test,expect} from '@playwright/test';
+test('every component has a working live example and source, without runtime errors',async({page})=>{
+ test.setTimeout(90000);const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));await page.goto('/__test/all/');const nav=page.getByRole('navigation',{name:'Component library'});await expect(nav.locator('button')).toHaveCount(68);const entries=await nav.locator('button').all();expect(entries.length).toBe(68);for(const button of entries){await button.click();await expect(page.locator('.collection-demo')).toBeVisible();await expect(page.locator('.component-document-heading h3')).not.toBeEmpty();await page.getByRole('tab',{name:'Source',exact:true}).click();await expect(page.locator('.component-source')).toContainText('export');}expect(errors).toEqual([]);
+});
+test('table filtering, command search, calendar selection and questionnaire steps work',async({page})=>{
+ await page.goto('/__test/all/');const choose=async(slug:string)=>page.locator(`[data-component="${slug}"]`).click();await choose('data-table');await page.locator('.collection-demo').getByLabel('Filter table rows').fill('Atlas');await expect(page.locator('.collection-demo .av-table-body')).toContainText('Atlas');await expect(page.locator('.collection-demo .av-table-body .av-table-row')).toHaveCount(1);
+ await choose('command');await page.locator('.collection-demo [cmdk-input]').fill('Settings');await expect(page.locator('.collection-demo [cmdk-item]')).toHaveCount(1);
+ await choose('questionnaire');await page.getByRole('radio',{name:'With a team'}).click();await page.getByRole('button',{name:'Continue',exact:true}).click();await expect(page.getByRole('heading',{name:'What are you building?',exact:true})).toBeVisible();
+ await choose('calendar');await expect(page.locator('.collection-demo .rdp-root')).toBeVisible();await page.locator('.collection-demo .rdp-day_button').filter({hasText:/^15$/}).first().click();await expect(page.locator('.collection-demo [aria-selected=true]')).toHaveCount(1);
+});

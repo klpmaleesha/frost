@@ -1,0 +1,3 @@
+'use client';
+import { Progress as Primitive } from 'radix-ui';
+export function Progress({value, label, showValue = true}: {value: number; label: string; showValue?: boolean}) { const normalized = Number.isFinite(value) ? Math.max(0,Math.min(100,value)) : 0; return <div className="av-progress-wrap"><div className="av-progress-label"><span>{label}</span>{showValue && <span>{Math.round(normalized)}%</span>}</div><Primitive.Root className="av-progress" value={normalized} aria-label={label}><Primitive.Indicator className="av-progress-indicator" style={{transform:`translateX(-${100-normalized}%)`}}/></Primitive.Root></div>; }

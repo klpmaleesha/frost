@@ -1,0 +1,10 @@
+{
+  "samples": 174,
+  "medianMs": 16.699999999999818,
+  "p95Ms": 16.899999999999636,
+  "longTasks": 0,
+  "largestLongTaskMs": 0,
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
+  "surfaces": 62,
+  "enhancedSurfaces": 12
+}
