@@ -1,10 +1,10 @@
 {
   "task": "12 interrupted shell expansions/collapses at 90ms intervals",
-  "samples": 392,
+  "samples": 399,
   "medianMs": 16.699999999999818,
-  "p95Ms": 16.900000000000546,
-  "longTasks": 0,
-  "largestLongTaskMs": 0,
+  "p95Ms": 18.199999999999818,
+  "longTasks": 1,
+  "largestLongTaskMs": 50,
   "backgroundTextureUploads": 0,
   "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
   "viewport": [

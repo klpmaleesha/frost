@@ -1,5 +1,5 @@
 'use client';
-import { createContext, forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState, type HTMLAttributes, type ReactNode } from 'react';
+import { createContext, forwardRef, useContext, useEffect, useLayoutEffect, useRef, useState, useMemo, useId, type HTMLAttributes, type ReactNode } from 'react';
 import { FrostEngine, defaultFrostConfig, type FrostConfig, type FrostTelemetry } from './frost-engine';
 import type { FrostSceneKind } from './frost-optics';
 import type {FrostMaterial} from './frost-material';
@@ -9,15 +9,21 @@ export type { FrostSceneKind } from './frost-optics';
 export { FrostEngine, defaultFrostConfig, frostPresets } from './frost-engine';
 export type { FrostConfig, FrostTelemetry } from './frost-engine';
 export { MotionPredictor, springStep, resist } from './frost-physics';
-const FrostContext=createContext<FrostEngine|null>(null);
+export type FrostController=Pick<FrostEngine,'register'|'excite'|'morph'|'glide'|'startDrag'|'moveDrag'|'inspect'|'subscribe'|'getTelemetry'|'getResources'>&{update:(config:Partial<FrostConfig>)=>void;readonly config:FrostConfig};
+const FrostContext=createContext<{engine:FrostEngine;controller:FrostController;scope:string;config:FrostConfig}|null>(null);
 const useMountEffect=typeof window==='undefined'?useEffect:useLayoutEffect;
+let sharedEngine:FrostEngine|null=null,providers=0;
 export function FrostProvider({children,config={}}:{children:ReactNode;config?:Partial<FrostConfig>}){
-  const [engine]=useState(()=>new FrostEngine(config));
-  useMountEffect(()=>engine.mount(),[engine]);
-  useEffect(()=>engine.update(config),[engine,config]);
-  return <FrostContext.Provider value={engine}>{children}</FrostContext.Provider>;
+ const parent=useContext(FrostContext),scope='frost-'+useId().replace(/[^a-zA-Z0-9_-]/g,''),root=useRef<HTMLDivElement>(null);
+ const[engine]=useState(()=>parent?.engine||(typeof document==='undefined'?new FrostEngine():sharedEngine||(sharedEngine=new FrostEngine())));
+ const resolved=useMemo(()=>({...defaultFrostConfig,...parent?.config,...config,lighting:{...parent?.config.lighting,...config.lighting}}),[parent?.config,config]);
+ const controller=useMemo<FrostController>(()=>({get config(){return engine.scopeConfig(scope)},update:patch=>{if(root.current)engine.setScope(scope,root.current,patch)},register:el=>engine.register(el),excite:(el,strength,x,y)=>engine.excite(el,strength,x,y),glide:(el,x,y)=>engine.glide(el,x,y),morph:(el,target)=>engine.morph(el,target),startDrag:(el,event)=>engine.startDrag(el,event),moveDrag:(el,x,y)=>engine.moveDrag(el,x,y),inspect:el=>engine.inspect(el),subscribe:fn=>engine.subscribe(fn),getResources:()=>engine.getResources(),getTelemetry:()=>engine.getTelemetry()}),[engine,scope]);
+ useMountEffect(()=>{if(providers++===0)engine.mount();if(root.current)engine.setScope(scope,root.current,resolved);return()=>{engine.removeScope(scope);if(--providers===0)engine.destroy()}},[engine,scope]);
+ useEffect(()=>{if(root.current)engine.setScope(scope,root.current,resolved)},[engine,scope,resolved]);
+ return <FrostContext.Provider value={{engine,controller,scope,config:resolved}}><div ref={root} data-frost-scope={scope} style={{display:'contents'}}>{children}</div></FrostContext.Provider>;
 }
-export function useFrost(){const engine=useContext(FrostContext);return engine;}
+export function useFrost(){return useContext(FrostContext)?.controller||null;}
+export function useFrostScopeProps(){const context=useContext(FrostContext);return context?{'data-frost-scope':context.scope}:{};}
 export function useFrostTelemetry(){
   const engine=useFrost();const[stats,setStats]=useState<FrostTelemetry>({surfaces:0,active:0,fps:0,velocity:0,prediction:24,reducedMotion:false});
   useEffect(()=>engine?.subscribe(setStats),[engine]);return stats;

@@ -11,11 +11,11 @@ npm run dev -- --port 5174
 
 The live explorer includes 68 families: equivalents for the 66 entries in the official shadcn/ui main catalog audited on 2026-11-14, plus Form and Frost. Each has a live example, typed source, copyable usage and installation information. Equivalence does not mean identical upstream APIs or every upstream variant. AI Elements is a separate upstream collection and is outside this inventory.
 
-Material demonstrations include pure white/black, an optical before/after, supplied-photo/grid refraction, five representative controls, edge inspection, physics presets, slow-motion inspection and a draggable panel. Settings, dashboard, and project form examples demonstrate denser interfaces. These examples use local state, not a backend.
+The dedicated /playground/liquid/ page demonstrates full-shell pressure, boundary recovery, popup entry/exit, notifications, loading, and nested material scopes. Material demonstrations also include pure white/black, an optical before/after, supplied-photo/grid refraction, five representative controls, edge inspection, physics presets, slow-motion inspection and a draggable panel. Settings, dashboard, and project form examples demonstrate denser interfaces. These examples use local state, not a backend.
 
 ## Website pages
 
-The local home page is http://127.0.0.1:5174/. Documentation has a separate cover at /docs/, 16 focused guides, and individual routes for all 68 component families. Examples and material studies are separate pages. /playground/stress/ contains the permanent optical and usability lab, renderer diagnostics, and shape-transition tests. Production builds write 98 addressable HTML pages with metadata and a sitemap. Publishing is on hold at the user’s request.
+The local home page is http://127.0.0.1:5174/. Documentation has a separate cover at /docs/, 16 focused guides, and individual routes for all 68 component families. Examples and material studies are separate pages. /playground/stress/ contains the permanent optical and usability lab, renderer diagnostics, and shape-transition tests. Production builds write 99 addressable HTML pages with metadata and a sitemap. Documentation is hosted at https://frost.avyntora.com/.
 
 The engine now has shared lighting, thickness-driven optical metrics, Frost/Clear/Dense material presets, size-aware detail, overlapping-surface policy, and continuous DOM shell transitions. See docs/ENGINEERING.md for the implemented effects and limits.
 
@@ -78,7 +78,7 @@ The CSS path diffuses arbitrary underlying page content. The optional WebGL path
 
 Use `frostPresets.still`, `.subtle` or `.expressive`; Subtle is the default. Reduced motion removes elastic decoration. `quality: 'solid'` removes transparency, and `'economy'` reduces rendering cost. A single scheduler updates active visible surfaces and sleeps when settled. Prediction drives light, never semantic values.
 
-See [material and tokens](docs/MATERIAL.md), [architecture](docs/ARCHITECTURE.md), [coverage](docs/COVERAGE.md), and [verification](docs/VERIFICATION.md). Modal layout and stacking are intentionally separated from optical paint in the final `layout.css` layer.
+See [liquid motion and fallback behavior](docs/LIQUID.md), [material and tokens](docs/MATERIAL.md), [architecture](docs/ARCHITECTURE.md), [coverage](docs/COVERAGE.md), and [verification](docs/VERIFICATION.md). Modal layout and stacking are intentionally separated from optical paint in the final `layout.css` layer.
 
 ## Checks
 
@@ -88,6 +88,7 @@ npm run build:lib
 npm run check:distribution
 npx playwright install chromium
 npm test
+npm run test:production
 ```
 
 The browser tests cover all live examples, narrow layouts, chart paint resources, fully contained dialogs/drawers/sheets above their backdrops, keyboard behavior, nested popovers, touch, reduced motion, pointer reversals, switch alignment, dragging/cancellation, solid fallback and automated WCAG checks. `CHROMIUM_PATH` can select an installed browser. Distribution checking type-checks all copied examples and exercises the transitive local source installer.

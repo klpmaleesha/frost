@@ -1,0 +1,14 @@
+import {test,expect} from '@playwright/test';
+import type {FrostEngine} from '../src/components/frost-engine';
+declare global {interface Window {frostTest:FrostEngine;testGl:WebGLRenderingContext;testLoss:WEBGL_lose_context}}
+
+test('zero settings reach the renderer, resources prune, context recovers, teardown restores styles',async({page})=>{
+ await page.addInitScript(()=>{const original=HTMLCanvasElement.prototype.getContext;HTMLCanvasElement.prototype.getContext=function(this:HTMLCanvasElement,...args:Parameters<typeof original>){const context=original.apply(this,args);if(args[0]==='webgl')window.testGl=context as WebGLRenderingContext;return context} as typeof original});
+ await page.route('**/engine-harness/',route=>route.fulfill({contentType:'text/html',body:`<!doctype html><html style="--frost-blur:9px"><head><link rel="stylesheet" href="/src/components/styles.css"><link rel="stylesheet" href="/src/components/material.css"></head><body><div data-frost-scene="grid" style="width:500px;height:300px;padding:30px"><button class="av-button" style="width:240px;height:56px">Independent renderer</button></div></body></html>`}));
+ await page.goto('/engine-harness/');await page.evaluate(async()=>{const path='/src/components/frost-engine.ts';const{FrostEngine}=await import(path);window.frostTest=new FrostEngine({blur:0,roughness:0,edge:0,glow:0,shadow:0,maxDeformation:0});window.frostTest.mount()});const button=page.getByRole('button',{name:'Independent renderer'});await expect(button).toHaveAttribute('data-frost-renderer','webgl');
+ await button.click();await page.waitForTimeout(160);const data=await button.evaluate(el=>window.frostTest.inspect(el as HTMLElement));expect(data?.liquid.maxDisplacement).toBe(0);expect(data?.liquid.shape).toEqual([0,0,0]);expect(await button.evaluate(el=>getComputedStyle(el).getPropertyValue('--frost-edge'))).toBe('0');
+ const contexts=await page.evaluate(()=>window.testGl.getExtension('WEBGL_lose_context')!==null);expect(contexts).toBe(true);await page.evaluate(()=>{window.testLoss=window.testGl.getExtension('WEBGL_lose_context')!;window.testLoss.loseContext()});await expect(button).toHaveAttribute('data-frost-renderer','css');expect(await button.evaluate(el=>getComputedStyle(el,'::before').display)).not.toBe('none');
+ await page.waitForTimeout(120);await page.evaluate(()=>window.testLoss.restoreContext());await expect(button).toHaveAttribute('data-frost-renderer','webgl');
+ await page.evaluate(()=>document.querySelector('[data-frost-scene]')!.remove());await expect.poll(()=>page.evaluate(()=>window.frostTest.getResources().scenes)).toBe(0);
+ await page.evaluate(()=>window.frostTest.destroy());expect(await page.locator('html').evaluate(el=>(el as HTMLElement).style.getPropertyValue('--frost-blur'))).toBe('9px');await expect(page.locator('html')).not.toHaveAttribute('data-frost-motion');
+});

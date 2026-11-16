@@ -34,7 +34,8 @@
     "test": "playwright test",
     "preview": "vite preview --host 127.0.0.1",
     "prepack": "npm run build:lib",
-    "check:distribution": "node scripts/check-distribution.mjs"
+    "check:distribution": "node scripts/check-distribution.mjs",
+    "test:production": "npm run build && playwright test --config playwright.production.config.ts"
   },
   "peerDependencies": {
     "react": "^18.0.0 || ^19.0.0",

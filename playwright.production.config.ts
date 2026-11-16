@@ -1,0 +1,2 @@
+import {defineConfig} from '@playwright/test';
+export default defineConfig({testDir:'./release-tests',outputDir:'test-results-production',workers:1,reporter:'list',use:{baseURL:'http://127.0.0.1:5180',viewport:{width:1280,height:900},launchOptions:{executablePath:process.env.CHROMIUM_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe'}},webServer:{command:'npm run preview -- --port 5180 --strictPort',url:'http://127.0.0.1:5180',reuseExistingServer:false}});

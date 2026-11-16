@@ -1,10 +1,10 @@
 {
-  "samples": 174,
-  "medianMs": 16.699999999999818,
-  "p95Ms": 16.899999999999636,
+  "samples": 175,
+  "medianMs": 16.69999999999891,
+  "p95Ms": 16.80000000000109,
   "longTasks": 0,
   "largestLongTaskMs": 0,
   "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/157.0.0.0 Safari/537.36",
-  "surfaces": 62,
+  "surfaces": 65,
   "enhancedSurfaces": 12
 }

@@ -74,3 +74,5 @@ import './layout.css';
 export {FrostMorph} from './frost';
 export {materialPresets,elevations,defaultLighting,materialMetrics} from './frost-material';
 export type {FrostLighting,FrostMaterial,FrostDiagnostic} from './frost-material';
+
+export {ChartTooltipContent} from './chart';

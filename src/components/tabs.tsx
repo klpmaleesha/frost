@@ -1,7 +1,8 @@
 'use client';
-import type { ComponentProps } from 'react';
-import { Tabs as Primitive } from 'radix-ui';
-export const Tabs = Primitive.Root;
-export function TabsList({className = '', ...props}: ComponentProps<typeof Primitive.List>) { return <Primitive.List className={`av-tabs-list ${className}`} {...props}/>; }
-export function TabsTrigger({className = '', ...props}: ComponentProps<typeof Primitive.Trigger>) { return <Primitive.Trigger className={`av-tabs-trigger ${className}`} {...props}/>; }
-export function TabsContent({className = '', ...props}: ComponentProps<typeof Primitive.Content>) { return <Primitive.Content className={`av-tabs-content ${className}`} {...props}/>; }
+import {useEffect,useRef,forwardRef,type ComponentProps,type ElementRef} from 'react';
+import {Tabs as Primitive} from 'radix-ui';
+import {useFrost} from './frost';
+export const Tabs=Primitive.Root;
+export const TabsList=forwardRef<ElementRef<typeof Primitive.List>,ComponentProps<typeof Primitive.List>>(function TabsList({className='',children,...props},forwarded){const engine=useFrost(),root=useRef<HTMLDivElement|null>(null),indicator=useRef<HTMLSpanElement>(null);useEffect(()=>{const list=root.current,plate=indicator.current;if(!list||!plate)return;const update=()=>{const active=list.querySelector<HTMLElement>('[role=tab][data-state=active]');if(!active)return;engine?.register(plate);engine?.glide(plate,active.offsetLeft,active.offsetTop);engine?.morph(plate,{width:active.offsetWidth,height:active.offsetHeight,radius:8})};update();const mutations=new MutationObserver(update);mutations.observe(list,{subtree:true,attributes:true,attributeFilter:['data-state']});const resize=new ResizeObserver(update);resize.observe(list);return()=>{mutations.disconnect();resize.disconnect()}},[engine]);return <Primitive.List ref={el=>{root.current=el;if(typeof forwarded==='function')forwarded(el);else if(forwarded)forwarded.current=el}} className={`av-tabs-list ${className}`} {...props}><span ref={indicator} className="av-tabs-active-indicator frost-surface" aria-hidden="true"/>{children}</Primitive.List>});
+export function TabsTrigger({className='',...props}:ComponentProps<typeof Primitive.Trigger>){return <Primitive.Trigger className={`av-tabs-trigger ${className}`} {...props}/>}
+export function TabsContent({className='',...props}:ComponentProps<typeof Primitive.Content>){return <Primitive.Content className={`av-tabs-content ${className}`} {...props}/>}

@@ -18,3 +18,5 @@ docs/apple-*
 
 .vercel
 .env*
+
+test-results-production
