@@ -28,3 +28,6 @@
 /* Recharts measures within a zero-width wrapper; keep the measured pixel width. */
 .av-chart .recharts-wrapper{max-width:none!important;flex-shrink:0}.av-chart .recharts-surface{max-width:none!important}
 .av-badge{align-self:flex-start;width:fit-content;max-width:100%;flex:0 0 auto}
+
+/* Clip scrolling content, not the optical shell's contact and ambient shadows. */
+.av-overlay-layer>.av-dialog-content,.av-overlay-layer>.av-sheet-content{overflow:visible}

@@ -22,6 +22,10 @@ Chrome 157 on this Windows desktop, local server. Fifty pointer traversals with 
 
 The isolated 1440 × 1000 shape task performs 12 expansions/collapses with 90ms interruptions. After background texture caching, height-field buffer reuse, and removing redundant geometry reads: 399 intervals, median 16.7ms, p95 18.2ms, one reported 50ms long task, and zero background texture uploads. See shape-performance.json. Earlier concurrent measurements were worse; the isolated result does not guarantee smoothness during other intensive workloads or on other hardware.
 
+## Hosted and floating-frame follow-up
+
+The public Vercel build was verified by matching its asset URL to the local production output. A Chrome check of the hosted liquid playground confirmed a WebGL button, a CSS-frost dialog with 24px diffusion and its baked texture, working notifications, and no runtime errors. A subsequent visual inspection found the floating frame clipping its own ambient shadow. The shell now permits optical paint outside its bounds while the inner scroll body remains contained. Three additional overlay checks passed, including frame containment at 320/390/768/1440, all component content at 320/768, and explicit shadow/scroll separation.
+
 ## Liquid and fallback verification
 
 Presses deform the body and rim asymmetrically, while the button bounding box stays fixed and input editing stays precise. Field tests compare 30/60/120Hz, check bounds and finite state, and require complete settling. Dialog entry/exit, nested popovers, form validation, notifications, loading state, and tabs work in the liquid playground. Nested provider and portal settings stay independent. Simulated context loss activates CSS frost; restoration recovers the optical renderer. Removed scenes release resources and engine teardown restores prior material properties. Textareas and native selects use separate decorative shells; the default chart tooltip now uses the same material rather than an inline translucent fill.
